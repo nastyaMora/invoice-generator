@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/photographers", "destination": "/photographers.html" },
+    { "source": "/contractors", "destination": "/contractors.html" },
+    { "source": "/designers", "destination": "/designers.html" }
+  ]
+}
