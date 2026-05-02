@@ -6,7 +6,6 @@
   <title>Free Invoice Generator for Freelancers — No Sign Up Required</title>
   <meta name="description" content="Create and download professional invoices in seconds. Free invoice generator — no account, no sign up, no ads. Just fill in and download PDF."/>
   <meta name="keywords" content="free invoice generator, invoice maker, freelance invoice, invoice template, download invoice PDF"/>
-  <meta name="google-site-verification" content="Na9H8TWx4bxe_47BPMiqyzDofqIWMeFp6SKtX5KVQNQ" />
   <link rel="canonical" href="https://yoursite.vercel.app/"/>
 
   <!-- JSON-LD Schema for Google -->
@@ -293,6 +292,95 @@
     .inv-footer-brand { font-size: 11px; color: #ccc; }
     .inv-status { display: inline-block; background: #FEF9EC; border: 1px solid #F5D87A; color: #92620A; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 10px; border-radius: 20px; }
 
+    /* ─── Coming soon bar ─── */
+    .coming-soon-bar {
+      background: linear-gradient(90deg, #1A1916 0%, #2D2B27 100%);
+      color: #fff;
+      text-align: center;
+      padding: 10px 24px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .coming-soon-bar strong { color: #F5D87A; }
+    .coming-soon-bar .free-note { opacity: 0.65; font-size: 12px; }
+    .csb-badge {
+      background: rgba(245,216,122,0.15);
+      border: 1px solid rgba(245,216,122,0.3);
+      color: #F5D87A;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── Pro feature buttons ─── */
+    .pro-actions { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+    .btn-pro {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1.5px dashed #C8C4BA;
+      border-radius: 8px;
+      cursor: not-allowed;
+      padding: 10px 16px;
+      background: #FAFAF8;
+      color: #A8A49C;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      position: relative;
+      flex: 1;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .btn-pro:hover { border-color: #1A1916; color: #1A1916; background: #F5F3EE; }
+    .btn-pro .pro-tag {
+      background: #1A1916;
+      color: #F5D87A;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── Tooltip ─── */
+    .tooltip-wrap { position: relative; flex: 1; }
+    .tooltip-wrap .tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1A1916;
+      color: #fff;
+      font-size: 12px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      white-space: nowrap;
+      z-index: 100;
+      line-height: 1.5;
+      text-align: center;
+      pointer-events: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    .tooltip-wrap .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: #1A1916;
+    }
+    .tooltip-wrap:hover .tooltip { display: block; }
+    .tooltip-wrap .btn-pro { width: 100%; }
+
     /* ─── Upgrade banner ─── */
     .upgrade-banner {
       margin-top: 20px;
@@ -364,6 +452,12 @@
   </div>
   <span class="header-badge">100% Free</span>
 </header>
+
+<div class="coming-soon-bar">
+  <span class="csb-badge">PRO · COMING SOON</span>
+  <span>Send invoices via <strong>email</strong> + add your <strong>logo & brand colors</strong> — <strong>$9/mo</strong></span>
+  <span class="free-note">✓ PDF download stays free forever</span>
+</div>
 
 <div class="trust-bar">
   <span>No account needed</span>
@@ -491,9 +585,32 @@
 
     <div class="preview-actions">
       <button class="btn btn-green btn-large" onclick="downloadPDF()">
-        ↓ Download PDF
+        ↓ Download PDF — Free
       </button>
     </div>
+
+    <!-- Pro feature buttons -->
+    <div class="pro-actions">
+      <div class="tooltip-wrap">
+        <button class="btn-pro" disabled>
+          ✉ Send via Email <span class="pro-tag">PRO</span>
+        </button>
+        <div class="tooltip">
+          Send the invoice directly to your client's inbox<br/>
+          No PDF attachment needed · Coming soon · $9/mo
+        </div>
+      </div>
+      <div class="tooltip-wrap">
+        <button class="btn-pro" disabled>
+          🎨 Add Logo & Brand Colors <span class="pro-tag">PRO</span>
+        </button>
+        <div class="tooltip">
+          Upload your logo, set brand colors & font<br/>
+          Your invoice, your brand · Coming soon · $9/mo
+        </div>
+      </div>
+    </div>
+
     <button class="btn btn-secondary" style="width:100%;margin-top:10px;justify-content:center" onclick="clearForm()">
       Clear & start over
     </button>
@@ -501,11 +618,12 @@
     <!-- Upgrade banner -->
     <div class="upgrade-banner">
       <div>
-        <h3>Unlock Pro features</h3>
-        <p>Custom logo · Unlimited invoices · Custom branding · Client portal</p>
+        <h3>✨ Pro is coming soon</h3>
+        <p>Email sending · Logo & branding · Unlimited history · $9/mo<br/>
+        <span style="opacity:0.5;font-size:11px">PDF download will always stay free.</span></p>
       </div>
-      <button class="btn-upgrade" onclick="alert('Pro coming soon! Enter your email to get notified.')">
-        Upgrade — $9/mo
+      <button class="btn-upgrade" onclick="alert('Drop your email at the link in bio — we\'ll notify you the moment Pro launches!')">
+        Notify me
       </button>
     </div>
 
