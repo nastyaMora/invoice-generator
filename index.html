@@ -28,7 +28,8 @@
   </script>
 
   <!-- Favicon: бирюзовая ракушка -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>"/>
+  <link rel="icon" type="image/png" href="/favicon-512x512.png"/>
+  <link rel="apple-touch-icon" href="/favicon-512x512.png"/>
 
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -995,14 +996,11 @@
     }
     emailInput.style.border = 'none';
 
-    // Отправляем в Tally через hidden iframe (без редиректа)
-    const tallyUrl = `https://tally.so/r/1AGlYM?email=${encodeURIComponent(email)}&embed=1`;
-    const iframe = document.createElement('iframe');
-    iframe.src = tallyUrl;
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
+    // Открываем Tally с предзаполненным email в новой вкладке
+    const tallyUrl = `https://tally.so/r/1AGlYM?email=${encodeURIComponent(email)}`;
+    window.open(tallyUrl, '_blank');
 
-    // Показываем подтверждение
+    // Показываем подтверждение на странице
     document.getElementById('waitlist-btn').disabled = true;
     document.getElementById('waitlist-btn').style.opacity = '0.5';
     emailInput.style.display = 'none';
