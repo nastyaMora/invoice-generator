@@ -27,6 +27,9 @@
   }
   </script>
 
+  <!-- Favicon: бирюзовая ракушка -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>"/>
+
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -617,14 +620,27 @@
 
     <!-- Upgrade banner -->
     <div class="upgrade-banner">
-      <div>
+      <div style="flex:1">
         <h3>✨ Pro is coming soon</h3>
-        <p>Email sending · Logo & branding · Unlimited history · $9/mo<br/>
+        <p style="margin-bottom:12px">Email sending · Logo & branding · $9/mo<br/>
         <span style="opacity:0.5;font-size:11px">PDF download will always stay free.</span></p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input
+            type="email"
+            id="waitlist-email"
+            placeholder="your@email.com"
+            style="flex:1;min-width:160px;padding:9px 14px;border-radius:7px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;color:#1A1916"
+          />
+          <button
+            class="btn-upgrade"
+            onclick="joinWaitlist()"
+            id="waitlist-btn"
+          >Notify me</button>
+        </div>
+        <div id="waitlist-thanks" style="display:none;margin-top:8px;font-size:12px;color:#F5D87A">
+          ✓ You're on the list! We'll email you when Pro launches.
+        </div>
       </div>
-      <button class="btn-upgrade" onclick="alert('Drop your email at the link in bio — we\'ll notify you the moment Pro launches!')">
-        Notify me
-      </button>
     </div>
 
   </div>
@@ -967,6 +983,30 @@
     document.getElementById('inv-due').value = fmt(d);
     items = [{ desc:'', qty:1, price:'' }, { desc:'', qty:1, price:'' }];
     renderItems();
+  }
+
+  function joinWaitlist() {
+    const emailInput = document.getElementById('waitlist-email');
+    const email = emailInput.value.trim();
+    if (!email || !email.includes('@')) {
+      emailInput.style.border = '2px solid #C0392B';
+      emailInput.focus();
+      return;
+    }
+    emailInput.style.border = 'none';
+
+    // Отправляем в Tally через hidden iframe (без редиректа)
+    const tallyUrl = `https://tally.so/r/1AGlYM?email=${encodeURIComponent(email)}&embed=1`;
+    const iframe = document.createElement('iframe');
+    iframe.src = tallyUrl;
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    // Показываем подтверждение
+    document.getElementById('waitlist-btn').disabled = true;
+    document.getElementById('waitlist-btn').style.opacity = '0.5';
+    emailInput.style.display = 'none';
+    document.getElementById('waitlist-thanks').style.display = 'block';
   }
 
   // ── Init ──
