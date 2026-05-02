@@ -625,24 +625,15 @@
         <h3>✨ Pro is coming soon</h3>
         <p style="margin-bottom:12px">Email sending · Logo & branding · $9/mo<br/>
         <span style="opacity:0.5;font-size:11px">PDF download will always stay free.</span></p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <input
-            type="email"
-            id="waitlist-email"
-            placeholder="your@email.com"
-            style="flex:1;min-width:160px;padding:9px 14px;border-radius:7px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;color:#1A1916"
-          />
-          <button
-            class="btn-upgrade"
-            onclick="joinWaitlist()"
-            id="waitlist-btn"
-          >Notify me</button>
-        </div>
-        <div id="waitlist-thanks" style="display:none;margin-top:8px;font-size:12px;color:#F5D87A">
-          ✓ You're on the list! We'll email you when Pro launches.
-        </div>
+        <button
+          class="btn-upgrade"
+          data-tally-open="1AGlYM"
+          data-tally-emoji-text="🐚"
+          data-tally-emoji-animation="wave"
+        >✉ Notify me when Pro launches</button>
       </div>
     </div>
+    <script async src="https://tally.so/widgets/embed.js"></script>
 
   </div>
 </div>
@@ -984,27 +975,6 @@
     document.getElementById('inv-due').value = fmt(d);
     items = [{ desc:'', qty:1, price:'' }, { desc:'', qty:1, price:'' }];
     renderItems();
-  }
-
-  function joinWaitlist() {
-    const emailInput = document.getElementById('waitlist-email');
-    const email = emailInput.value.trim();
-    if (!email || !email.includes('@')) {
-      emailInput.style.border = '2px solid #C0392B';
-      emailInput.focus();
-      return;
-    }
-    emailInput.style.border = 'none';
-
-    // Открываем Tally с предзаполненным email в новой вкладке
-    const tallyUrl = `https://tally.so/r/1AGlYM?Email=${encodeURIComponent(email)}`;
-    window.open(tallyUrl, '_blank');
-
-    // Показываем подтверждение на странице
-    document.getElementById('waitlist-btn').disabled = true;
-    document.getElementById('waitlist-btn').style.opacity = '0.5';
-    emailInput.style.display = 'none';
-    document.getElementById('waitlist-thanks').style.display = 'block';
   }
 
   // ── Init ──
